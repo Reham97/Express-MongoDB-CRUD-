@@ -6,6 +6,8 @@ const exphbs = require('express-handlebars');
 const bodyparser = require('body-parser');
 
 const userController = require('./controllers/userController');
+const postController = require('./controllers/postController');
+
 const app = express();
 
 app.use(bodyparser.urlencoded({
@@ -36,4 +38,5 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
+app.use('/post', postController);
 app.use('/user', userController);

@@ -6,3 +6,4 @@ mongoose.connect('mongodb://localhost/UsersDB', { useNewUrlParser: true }, (err)
 });
 
 require('./user');
+require('./post');

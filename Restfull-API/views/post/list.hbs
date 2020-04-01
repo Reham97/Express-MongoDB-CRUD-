@@ -1,0 +1,29 @@
+<h2><a class="btn btn-secondary" href="/user/list"><i class="fa fa-list-alt"></i> Back </a> {{viewTitle}}</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Body</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {{#each this.list as |post|}}
+    
+        <tr>
+            <td>{{post.title}}</td>
+            <td>{{post.body}}</td>
+        </tr>
+        {{/each}}
+        <tr>
+            <div class="text-danger">
+              {{#each this.errors as |err|}}
+                   {{err}}
+              {{/each}}
+            </div>
+        </tr>
+    </tbody>
+</table>
+
+       

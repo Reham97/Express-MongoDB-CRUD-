@@ -19,8 +19,8 @@
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.password}}</td>
-            <td><a href="/user/{{user._id}}" class="btn btn-link">Add Post</a> </td>
-            <td><a href="/user/{{user._id}}/list" class="btn btn-link">List Posts</a></td>
+            <td><a href="/post/{{user._id}}/add" class="btn btn-link">Add Post</a> </td>
+            <td><a href="/post/{{user._id}}/list" class="btn btn-link">List Posts</a></td>
             <td>
                 <a href="/user/{{user._id}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                 <a href="/user/delete/{{user._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>

@@ -9,19 +9,10 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: 'This field is required.'
     },
-    password: {
-        type: String,
-        required: 'This field is required.'
-    },
-    posts : [{ 
-        title: {
-            type: String,
-            required: 'This field is required.'
-        },
-        body: {
-            type: String,
-        }
-        }]
+    posts: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Post'
+      }]
 });
 
 // Custom validation for email
