@@ -15,15 +15,15 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     if (req.body._id == '')
         insertRecord(req, res);
-     else
-         updateRecord(req, res);
+    else
+        updateRecord(req, res);
     // console.log(req.body)
 });
 
 
 function insertRecord(req, res) {
-   
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+
+    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
         var user = new User();
         user.name = req.body.name;
         user.email = req.body.email;
@@ -46,23 +46,38 @@ function insertRecord(req, res) {
 
     });
 
-   
+
 }
 
 function updateRecord(req, res) {
-    User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
-        if (!err) { res.redirect('user/list'); }
-        else {
-            if (err.name == 'ValidationError') {
-                handleValidationError(err, req.body);
-                res.render("user/addOrEdit", {
-                    viewTitle: 'Update User',
-                    user: req.body
+    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+        User.findOne({ _id: req.body._id }, function (err, user) {
+            if (user) {
+                user.name = req.body.name;
+                user.email = req.body.email;
+                if(req.body.password !== "")
+                {
+                    user.password = hash;
+                }
+              
+                user.save((err, doc) => {
+
+                    if (!err) { res.redirect('user/list'); }
+                    else {
+                        if (err.name == 'ValidationError') {
+                            handleValidationError(err, req.body);
+                            res.render("user/addOrEdit", {
+                                viewTitle: 'Update User',
+                                user: req.body
+                            });
+                        }
+                        else
+                            console.log('Error during record update : ' + err);
+                    }
                 });
             }
-            else
-                console.log('Error during record update : ' + err);
-        }
+
+        });
     });
 }
 
