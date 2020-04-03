@@ -2,6 +2,9 @@ const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 router.get('/', (req, res) => {
     res.render("user/addOrEdit", {
@@ -19,25 +22,31 @@ router.post('/', (req, res) => {
 
 
 function insertRecord(req, res) {
-    var user = new User();
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.password = req.body.password;
-    user.save((err, doc) => {
-        if (!err)
-            res.redirect('user/list');
-        else {
-            if (err.name == 'ValidationError') {
-                handleValidationError(err, req.body);
-                res.render("user/addOrEdit", {
-                    viewTitle: "Insert User",
-                    user: req.body
-                });
+   
+    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+        var user = new User();
+        user.name = req.body.name;
+        user.email = req.body.email;
+        user.password = hash;
+        user.save((err, doc) => {
+            if (!err)
+                res.redirect('user/list');
+            else {
+                if (err.name == 'ValidationError') {
+                    handleValidationError(err, req.body);
+                    res.render("user/addOrEdit", {
+                        viewTitle: "Insert User",
+                        user: req.body
+                    });
+                }
+                else
+                    console.log('Error during record insertion : ' + err);
             }
-            else
-                console.log('Error during record insertion : ' + err);
-        }
+        });
+
     });
+
+   
 }
 
 function updateRecord(req, res) {

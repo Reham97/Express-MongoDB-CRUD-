@@ -5,7 +5,6 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const bodyparser = require('body-parser');
 // const errorhandler = require('errorhandler')
-
 const userController = require('./controllers/userController');
 const postController = require('./controllers/postController');
 
@@ -44,10 +43,8 @@ app.use(function(error, req, res, next) {
 //teset error 
 //http://localhost:5000/
 app.get('/', (req, res, next) => {
-  // res.send('hi')
-  throw new Error('this is erorr woops')
-  // var MyError = createError('MyError', function (name, invalid) { this.message = 'The name ' + name + ' is invalid because of ' + invalid; });
-  // throw new MyError('test', 'problems');
+   res.send('uncomment line 47 in index.js to test error handler');
+  //throw new Error('this is erorr woops')
 });
 
 

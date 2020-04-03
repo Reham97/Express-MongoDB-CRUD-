@@ -9,6 +9,10 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: 'This field is required.'
     },
+    password: {
+        type: String,
+        required: 'This field is required.'
+    },
     posts: [{
         type: mongoose.Types.ObjectId,
         ref: 'Post'
