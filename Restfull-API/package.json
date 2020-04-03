@@ -10,11 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "errorhandler": "^1.5.1",
     "express": "^4.17.1",
-    "mongoose": "^5.9.7",
-    "nodemon": "^2.0.2",
     "express-handlebars": "^3.0.0",
-    "body-parser": "^1.18.3"
+    "mongoose": "^5.9.7",
+    "nodemon": "^2.0.2"
   },
   "devDependencies": {}
 }
